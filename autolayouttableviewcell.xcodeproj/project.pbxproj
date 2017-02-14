@@ -191,7 +191,7 @@
 				TargetAttributes = {
 					BB114BF41E51494600E014AF = {
 						CreatedOnToolsVersion = 7.2.1;
-						DevelopmentTeam = KPC52YPZEQ;
+						DevelopmentTeam = 4NU738LHQ7;
 					};
 				};
 			};
@@ -352,7 +352,7 @@
 				INFOPLIST_FILE = autolayouttableviewcell/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gzido.autolayouttableviewcell;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gzido.autolayouttableviewcell2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -365,7 +365,7 @@
 				INFOPLIST_FILE = autolayouttableviewcell/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.gzido.autolayouttableviewcell;
+				PRODUCT_BUNDLE_IDENTIFIER = com.gzido.autolayouttableviewcell2;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;

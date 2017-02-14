@@ -20,6 +20,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title=@"AutoLayout TableViewCell";
+    
 //    self.edgesForExtendedLayout=UIRectEdgeNone;
 //    self.view.backgroundColor=[UIColor whiteColor];
     

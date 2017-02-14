@@ -16,4 +16,5 @@
 @interface PhotosView : UIView
 @property (nonatomic,assign,readonly) CGFloat height;
 @property (nonatomic,assign) NSInteger photoCount;
+@property (nonatomic,strong) UIColor* photoBackgroundColor;
 @end

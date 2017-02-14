@@ -29,31 +29,36 @@
 {
     self=[super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        insets=UIEdgeInsetsMake(10, 12, 10, 12);
+        insets=UIEdgeInsetsMake(10, 15, 10, 15);
         
         self.head=[[UIImageView alloc]init];
-        self.head.backgroundColor=[UIColor redColor];
         [self.contentView addSubview:self.head];
         
         self.title=[[UILabel alloc]init];
         self.title.adjustsFontSizeToFitWidth=YES;
         self.title.minimumScaleFactor=0.2;
-        self.title.backgroundColor=[UIColor cyanColor];
+        self.title.textColor=[UIColor colorWithRed:0.5 green:0.5 blue:1.0 alpha:1];
         [self.contentView addSubview:self.title];
         
         self.detail=[[UILabel alloc]init];
-        self.detail.backgroundColor=[UIColor magentaColor];
         self.detail.numberOfLines=20;
         [self.contentView addSubview:self.detail];
         
+        self.photos=[[PhotosView alloc]init];
+        self.photos.photoBackgroundColor=[UIColor colorWithWhite:0.8 alpha:1];
+        [self.contentView addSubview:self.photos];
+        
         self.date=[[UILabel alloc]init];
-        self.date.backgroundColor=[UIColor greenColor];
+        self.date.font=[UIFont systemFontOfSize:12];
+        self.date.textColor=[UIColor grayColor];
         self.date.textAlignment=NSTextAlignmentRight;
         [self.contentView addSubview:self.date];
         
-        self.photos=[[PhotosView alloc]init];
-        self.photos.backgroundColor=[UIColor orangeColor];
-        [self.contentView addSubview:self.photos];
+//        self.head.backgroundColor=[UIColor redColor];
+//        self.title.backgroundColor=[UIColor cyanColor];
+//        self.detail.backgroundColor=[UIColor magentaColor];
+//        self.date.backgroundColor=[UIColor greenColor];
+//        self.photos.backgroundColor=[UIColor orangeColor];
         
         [self.head mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.left.equalTo(self.contentView).insets(insets).key(@"head_top_left");
@@ -69,7 +74,6 @@
         [self.detail mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.equalTo(self.title.mas_left).key(@"detail_left");
             make.right.equalTo(self.title.mas_right).key(@"detail_right");
-            make.top.equalTo(self.title.mas_bottom).insets(insets).key(@"detail_top");
         }];
         
         [self.photos mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -89,23 +93,12 @@
 -(void)updateConstraints
 {
     [self.detail mas_updateConstraints:^(MASConstraintMaker *make) {
-        if (self.detail.text.length>0) {
-            make.top.equalTo(self.title.mas_bottom).insets(insets);
-        }
-        else{
-            make.top.equalTo(self.title.mas_bottom).offset(0);
-        }
+        make.top.equalTo(self.title.mas_bottom).offset(self.detail.text.length>0?insets.top:0);
     }];
 
     [self.photos mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(self.photos.height)).key(@"photos_height");
-        if (self.photos.photoCount>0) {
-            make.top.equalTo(self.detail.mas_bottom).insets(insets).priorityLow();
-        }
-        else
-        {
-            make.top.equalTo(self.detail.mas_bottom).priorityLow();
-        }
+        make.top.equalTo(self.detail.mas_bottom).offset(self.photos.photoCount>0?insets.top:0).priorityLow();
     }];
     
     [super updateConstraints];
@@ -119,6 +112,7 @@
     self.detail.text=_model.detail;
     self.date.text=@"today";
     self.photos.photoCount=_model.photoCount;
+    
     [self setNeedsUpdateConstraints];
     [self updateConstraintsIfNeeded];
 }
@@ -167,8 +161,10 @@
             UILabel* php=[[UILabel alloc]init];
             php.text=[NSString stringWithFormat:@"photo%d",i+1];
             php.textAlignment=NSTextAlignmentCenter;
-            php.layer.borderColor=[UIColor blackColor].CGColor;
-            php.layer.borderWidth=0.5;
+            php.textColor=[UIColor whiteColor];
+//            php.layer.borderColor=[UIColor blackColor].CGColor;
+//            php.layer.borderWidth=0.5;
+            php.backgroundColor=self.photoBackgroundColor;
             [self addSubview:php];
         }
     }
@@ -225,6 +221,15 @@
 -(CGFloat)height
 {
     return hh;
+}
+
+-(void)setPhotoBackgroundColor:(UIColor *)photoBackgroundColor
+{
+    _photoBackgroundColor=photoBackgroundColor;
+    NSArray* subViews=self.subviews;
+    for (UIView *v in subViews) {
+        v.backgroundColor=photoBackgroundColor;
+    }
 }
 
 @end

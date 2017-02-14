@@ -16,7 +16,7 @@
     m.imageName=@"img";
     
     NSString* titl=@"";
-    int laps=arc4random()%10;
+    int laps=arc4random()%10+1;
     for (int i=0; i<laps; i++) {
         titl=[NSString stringWithFormat:@"%@titletitl",titl];
     }
