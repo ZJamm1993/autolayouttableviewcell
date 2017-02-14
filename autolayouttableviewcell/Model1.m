@@ -15,10 +15,15 @@
     
     m.imageName=@"img";
     
-    m.title=[NSString stringWithFormat:@"title%d",arc4random()%1000];
+    NSString* titl=@"";
+    int laps=arc4random()%10;
+    for (int i=0; i<laps; i++) {
+        titl=[NSString stringWithFormat:@"%@titletitl",titl];
+    }
+    m.title=titl;
     
     NSString* dett=@"";
-    int laps=arc4random()%4;
+    laps=arc4random()%4;
     for (int i=0; i<laps; i++) {
         dett=[NSString stringWithFormat:@"%@行行行行行行行行行行行行行行行行行行行行,",dett];
     }

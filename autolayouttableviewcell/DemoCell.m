@@ -36,6 +36,8 @@
         [self.contentView addSubview:self.head];
         
         self.title=[[UILabel alloc]init];
+        self.title.adjustsFontSizeToFitWidth=YES;
+        self.title.minimumScaleFactor=0.2;
         self.title.backgroundColor=[UIColor cyanColor];
         [self.contentView addSubview:self.title];
         
