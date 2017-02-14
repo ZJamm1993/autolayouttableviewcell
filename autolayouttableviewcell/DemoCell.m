@@ -64,18 +64,16 @@
             make.right.equalTo(self.contentView).offset(-40).key(@"title_right");
         }];
         
-//        [self.detail mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.title.mas_left).key(@"detail_left");
-//            make.right.equalTo(self.title.mas_right).key(@"detail_right");
-//            make.top.equalTo(self.title.mas_bottom).insets(insets).key(@"detail_top");
-//        }];
-//        
-//        [self.photos mas_makeConstraints:^(MASConstraintMaker *make) {
-//            make.left.equalTo(self.title.mas_left).key(@"photos_left");
-//            make.right.equalTo(self.title.mas_right).key(@"photos_right");
-////            make.height.greaterThanOrEqualTo(@(100)).key(@"photos_height");
-//            make.top.equalTo(self.detail.mas_bottom).insets(insets).key(@"photos_top");
-//        }];
+        [self.detail mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.title.mas_left).key(@"detail_left");
+            make.right.equalTo(self.title.mas_right).key(@"detail_right");
+            make.top.equalTo(self.title.mas_bottom).insets(insets).key(@"detail_top");
+        }];
+        
+        [self.photos mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(self.title.mas_left).key(@"photos_left");
+            make.right.equalTo(self.title.mas_right).key(@"photos_right");
+        }];
         
         [self.date mas_makeConstraints:^(MASConstraintMaker *make) {
             make.top.equalTo(self.photos.mas_bottom).insets(insets).key(@"date_top");
@@ -88,9 +86,7 @@
 
 -(void)updateConstraints
 {
-    [self.detail mas_remakeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self.title.mas_left).key(@"detail_left");
-        make.right.equalTo(self.title.mas_right).key(@"detail_right");
+    [self.detail mas_updateConstraints:^(MASConstraintMaker *make) {
         if (self.detail.text.length>0) {
             make.top.equalTo(self.title.mas_bottom).insets(insets);
         }
@@ -99,16 +95,14 @@
         }
     }];
 
-    [self.photos mas_remakeConstraints:^(MASConstraintMaker *make) {
+    [self.photos mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(self.photos.height)).key(@"photos_height");
-        make.left.equalTo(self.title.mas_left).key(@"photos_left");
-        make.right.equalTo(self.title.mas_right).key(@"photos_right");
         if (self.photos.photoCount>0) {
-            make.top.equalTo(self.detail.mas_bottom).insets(insets);
+            make.top.equalTo(self.detail.mas_bottom).insets(insets).priorityLow();
         }
         else
         {
-            make.top.equalTo(self.detail.mas_bottom);
+            make.top.equalTo(self.detail.mas_bottom).priorityLow();
         }
     }];
     
@@ -127,12 +121,12 @@
     [self updateConstraintsIfNeeded];
 }
 
--(void)layoutSubviews
-{
-    [super layoutSubviews];
-    NSLog(@"cell %@",self.contentView.description);
-    NSLog(@"layout subviews TITLE %@ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",self.model.title);
-}
+//-(void)layoutSubviews
+//{
+//    [super layoutSubviews];
+//    NSLog(@"cell %@",self.contentView.description);
+//    NSLog(@"layout subviews TITLE %@ >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",self.model.title);
+//}
 
 @end
 
