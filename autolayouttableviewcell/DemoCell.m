@@ -42,10 +42,11 @@
         
         self.detail=[[UILabel alloc]init];
         self.detail.numberOfLines=20;
+        self.detail.font=[UIFont systemFontOfSize:14];
         [self.contentView addSubview:self.detail];
         
         self.photos=[[PhotosView alloc]init];
-        self.photos.photoBackgroundColor=[UIColor colorWithWhite:0.8 alpha:1];
+        self.photos.photoBackgroundColor=[UIColor colorWithWhite:0.9 alpha:1];
         [self.contentView addSubview:self.photos];
         
         self.date=[[UILabel alloc]init];
@@ -69,6 +70,7 @@
             make.top.equalTo(self.head.mas_top).key(@"title_top");
             make.left.equalTo(self.head.mas_right).insets(insets).key(@"title_left");
             make.right.equalTo(self.contentView).offset(-40).key(@"title_right");
+            make.height.equalTo(@(30)).key(@"title_height");
         }];
         
         [self.detail mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -93,12 +95,15 @@
 -(void)updateConstraints
 {
     [self.detail mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.title.mas_bottom).offset(self.detail.text.length>0?insets.top:0);
+        make.top.equalTo(self.title.mas_bottom).offset(self.detail.text.length>0?insets.top:0).priorityHigh();
+        // this top will be priorityHigh();
     }];
 
     [self.photos mas_updateConstraints:^(MASConstraintMaker *make) {
         make.height.equalTo(@(self.photos.height)).key(@"photos_height");
         make.top.equalTo(self.detail.mas_bottom).offset(self.photos.photoCount>0?insets.top:0).priorityLow();
+        // this top will be priorityLow();
+        // make sure no conflicts;
     }];
     
     [super updateConstraints];

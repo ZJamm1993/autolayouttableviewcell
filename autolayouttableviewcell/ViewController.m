@@ -27,7 +27,7 @@
     
     self.tableView=[[UITableView alloc]initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.tableView.rowHeight=UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight=1000;
+    self.tableView.estimatedRowHeight=200;
     
     self.tableView.delegate=self;
     self.tableView.dataSource=self;
@@ -39,7 +39,7 @@
 {
     if (_models==nil) {
         _models=[NSMutableArray array];
-        for (int i=0 ; i<100; i++) {
+        for (int i=0 ; i<50; i++) {
             Model1* m=[Model1 randomModel];
             if (m!=nil) {
                 [_models addObject:m];
