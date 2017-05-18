@@ -7,14 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Model1.h"
+#import "WhatsupModel.h"
+#import "CommentModel.h"
 
 @interface DemoCell : UITableViewCell
-@property (nonatomic,strong) Model1* model;
+@property (nonatomic,strong) WhatsupModel* model;
 @end
 
 @interface PhotosView : UIView
 @property (nonatomic,assign,readonly) CGFloat height;
-@property (nonatomic,assign) NSInteger photoCount;
-@property (nonatomic,strong) UIColor* photoBackgroundColor;
+@property (nonatomic,strong) NSArray* photos;
+@end
+
+@interface CommentsView : UIView
+@property (nonatomic,strong) NSArray* comments;
 @end
