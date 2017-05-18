@@ -124,7 +124,8 @@
 -(void)updateConstraints
 {
     [self.detail mas_updateConstraints:^(MASConstraintMaker *make) {
-        make.top.equalTo(self.title.mas_bottom).offset(self.detail.text.length>0?insets.top:0);
+        make.top.equalTo(self.title.mas_bottom).offset(self.detail.text.length>0?insets.top:0).priorityHigh();
+        // this top will be priorityHigh();
     }];
 
     [self.photosview mas_updateConstraints:^(MASConstraintMaker *make) {
